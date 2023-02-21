@@ -26,6 +26,8 @@ brew "fd"
 brew "fzf"
 # GitHub command-line tool
 brew "gh"
+# Distributed revision control system
+brew "git"
 # GNU implementation of the famous stream editor
 brew "gnu-sed"
 # Improved top (interactive process viewer)
