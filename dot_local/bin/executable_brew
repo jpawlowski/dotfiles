@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # Pass everything to brew
-/opt/homebrew/bin/brew "$@"
+$HOMEBREW_PREFIX/bin/brew "$@"
 
 # Dump after install or upgrade
 case "$1" in
