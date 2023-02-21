@@ -1,0 +1,9 @@
+Host *
+  User jp
+  ServerAliveInterval 120
+  ServerAliveCountMax 30
+  PreferredAuthentications publickey,keyboard-interactive
+  ForwardAgent yes
+  IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+  SendEnv LANG
+

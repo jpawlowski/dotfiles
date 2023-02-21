@@ -1,0 +1,147 @@
+tap "homebrew/autoupdate"
+tap "homebrew/bundle"
+tap "homebrew/cask-drivers"
+tap "homebrew/cask-fonts"
+# Cryptography and SSL/TLS Toolkit
+brew "openssl@3"
+# Light UNIX download accelerator
+brew "axel"
+# Clone of cat(1) with syntax highlighting and Git integration
+brew "bat"
+# Manage your dotfiles across multiple diverse machines, securely
+brew "chezmoi"
+# Good-lookin' diffs with diff-highlight and more
+brew "diff-so-fancy"
+# Load/unload environment variables based on $PWD
+brew "direnv"
+# .NET Core
+brew "dotnet"
+# Modern replacement for 'ls'
+brew "exa"
+# Simple, fast and user-friendly alternative to find
+brew "fd"
+# Command-line fuzzy finder written in Go
+brew "fzf"
+# GitHub command-line tool
+brew "gh"
+# Improved top (interactive process viewer)
+brew "htop"
+# Simple terminal UI for git commands
+brew "lazygit"
+# Mac App Store command-line interface
+brew "mas"
+# Terminal-based visual file manager
+brew "midnight-commander"
+# Menu-driven communications program
+brew "minicom"
+# Remote terminal application
+brew "mosh"
+# 'traceroute' and 'ping' in a single tool
+brew "mtr"
+# Port scanning utility for large networks
+brew "nmap"
+# PAM module for reattaching to the user's GUI (Aqua) session
+brew "pam-reattach"
+# Display the PID number for a given process name
+brew "pidof"
+# Show ps output as a tree
+brew "pstree"
+# Terminal multiplexer with VT100/ANSI terminal emulation
+brew "screen"
+# Command-line interface for https://speedtest.net bandwidth tests
+brew "speedtest-cli"
+# Command-line packet analyzer
+brew "tcpdump"
+# Analyze tcpdump output
+brew "tcptrace"
+# Programmatically correct mistyped console commands
+brew "thefuck"
+# Simplified and community-driven man pages
+brew "tldr"
+# Terminal multiplexer
+brew "tmux"
+# Shell completion for Tmuxinator
+brew "tmuxinator-completion"
+# Middlebox detection tool
+brew "tracebox"
+# Vi 'workalike' with many additional features
+brew "vim"
+# UNIX shell (command interpreter)
+brew "zsh"
+# Password manager that keeps all passwords secure behind one password
+cask "1password"
+# Command-line helper for the 1Password password manager
+cask "1password-cli"
+# Menu bar icon organizer
+cask "bartender"
+# Web browser focusing on privacy
+cask "brave-browser"
+# Web browser
+cask "firefox"
+# Developer targeted fonts with a high number of glyphs
+cask "font-meslo-lg-nerd-font"
+# Web browser
+cask "google-chrome"
+# Tools to protect your files
+cask "gpg-suite-no-mail"
+# App to manage access to corporate apps, data, and resources
+cask "intune-company-portal"
+# System monitoring app
+cask "istat-menus"
+# Terminal emulator as alternative to Apple's Terminal app
+cask "iterm2"
+# File archiver
+cask "keka"
+# Helper application for the Keka file archiver
+cask "kekaexternalhelper"
+# Provides updates to various Microsoft products
+cask "microsoft-auto-update"
+# Explorer for Azure Storage
+cask "microsoft-azure-storage-explorer"
+# Web browser
+cask "microsoft-edge"
+# Office suite
+cask "microsoft-office-businesspro"
+# Remote desktop client
+cask "microsoft-remote-desktop"
+# Open-source software for live streaming and screen recording
+cask "obs"
+cask "obs-virtualcam"
+# Command-line shell and scripting language
+cask "powershell"
+# Control your tools with a few keystrokes
+cask "raycast"
+# Music streaming service
+cask "spotify"
+# Messaging app with a focus on speed and security
+cask "telegram"
+# Open-source code editor
+cask "visual-studio-code"
+# Virtual machine client
+cask "vmware-horizon-client"
+# Rust-based terminal
+cask "warp"
+# Application for configuring any YubiKey
+cask "yubico-yubikey-manager"
+mas "1Password for Safari", id: 1569813296
+mas "Affinity Designer 2", id: 1616831348
+mas "Affinity Photo 2", id: 1616822987
+mas "Apple Configurator", id: 1037126344
+mas "AusweisApp2", id: 948660805
+mas "Blackmagic RAW Speed Test", id: 1466185689
+mas "Commander One PRO", id: 1035237815
+mas "Discovery", id: 1381004916
+mas "Disk Speed Test", id: 425264550
+mas "Fantastical", id: 975937182
+mas "FileZilla Pro", id: 1298486723
+mas "Microsoft Bing for Safari", id: 1560727432
+mas "Monosnap", id: 540348655
+mas "NordVPN", id: 905953485
+mas "OpenIn", id: 1643649331
+mas "Reeder", id: 1529448980
+mas "TestFlight", id: 899247664
+mas "TrashMe 3", id: 1490879410
+mas "UTM", id: 1538878817
+mas "WiFi Explorer", id: 494803304
+mas "WireGuard", id: 1451685025
+mas "Xcode", id: 497799835

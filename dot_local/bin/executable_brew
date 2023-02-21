@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+# Pass everything to brew
+/opt/homebrew/bin/brew "$@"
+
+# Dump after install or upgrade
+case "$1" in
+  install | uninstall | upgrade) /opt/homebrew/bin/brew bundle dump --global --describe --force;;
+esac
+
