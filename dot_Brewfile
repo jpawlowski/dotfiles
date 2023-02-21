@@ -10,6 +10,8 @@ brew "axel"
 brew "bat"
 # Manage your dotfiles across multiple diverse machines, securely
 brew "chezmoi"
+# GNU File, Shell, and Text utilities
+brew "coreutils"
 # Good-lookin' diffs with diff-highlight and more
 brew "diff-so-fancy"
 # Load/unload environment variables based on $PWD
@@ -24,6 +26,8 @@ brew "fd"
 brew "fzf"
 # GitHub command-line tool
 brew "gh"
+# GNU implementation of the famous stream editor
+brew "gnu-sed"
 # Improved top (interactive process viewer)
 brew "htop"
 # Simple terminal UI for git commands
@@ -40,6 +44,8 @@ brew "mosh"
 brew "mtr"
 # Port scanning utility for large networks
 brew "nmap"
+# OpenBSD freely-licensed SSH connectivity tools
+brew "openssh"
 # PAM module for reattaching to the user's GUI (Aqua) session
 brew "pam-reattach"
 # Display the PID number for a given process name
