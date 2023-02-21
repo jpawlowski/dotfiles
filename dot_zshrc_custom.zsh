@@ -15,6 +15,8 @@ fi
 export PATH="$HOME/.local/bin:$PATH"
 export PAGER="bat"
 
+source $HOME/.local/share/iterm2/iterm2_shell_integration.zsh
+
 alias zshc="$EDITOR $HOME/.zshrc_custom.zsh"
 alias zshs="$EDITOR $HOME/.secrets.sh"
 
