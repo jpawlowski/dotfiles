@@ -1,8 +1,23 @@
 {{- if eq .chezmoi.os "darwin" -}}
 #!/usr/bin/env bash
-brew bundle --global --no-lock --no-upgrade
-if [[ -f ~/Brewfile ]]; then
-       brew bundle --no-lock --no-upgrade
-fi
-{{ end -}}
 
+{{ if eq .chezmoi.arch "arm64" }}
+# Install Rosetta2 on ARM devices
+if ! [[ "/usr/bin/pgrep -q oahd" ]]; then
+	/usr/sbin/softwareupdate --install-rosetta --agree-to-license
+fi
+{{ end }}
+
+# Install Homebrew
+if ! [[ $HOMEBREW_PREFIX ]]; then
+	/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+	eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+
+if [[ -f ~/Brewfile ]]; then
+        brew bundle --no-lock --no-upgrade
+fi
+if [[ -f ~/.Brewfile ]]; then
+	brew bundle --global --no-lock --no-upgrade
+fi
+{{ end }}
