@@ -1,0 +1,8 @@
+{{- if eq .chezmoi.os "darwin" -}}
+#!/usr/bin/env bash
+brew bundle --global --no-lock --no-upgrade
+if [[ -f ~/Brewfile ]]; then
+       brew bundle --no-lock --no-upgrade
+fi
+{{ end -}}
+

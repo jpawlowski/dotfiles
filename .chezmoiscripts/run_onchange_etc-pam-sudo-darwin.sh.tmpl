@@ -1,0 +1,7 @@
+{{- if eq .chezmoi.os "darwin" -}}
+#!/usr/bin/env bash
+
+# etc-pam-sudo hash: {{ include "/etc/pam.d/sudo" | sha256sum }}
+grep -q pam_tid.so /etc/pam.d/sudo || \
+    sudo perl -i -pe 's/^(.+pam_smartcard.so)/auth       sufficient     pam_tid.so\n$1/' /etc/pam.d/sudo
+{{ end -}}

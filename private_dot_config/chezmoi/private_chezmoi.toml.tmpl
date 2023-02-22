@@ -1,0 +1,44 @@
+[edit]
+    command = "code"
+    args = ["--wait"]
+
+[diff]
+    pager = "diff-so-fancy"
+
+[[textconv]]
+    pattern = "**/*.plist"
+    command = "plutil"
+    args = ["-convert", "xml1", "-o", "-", "-"]
+
+[interpreters.ps1]
+    command = "pwsh"
+    args = ["-NoLogo"]
+
+{{ $chassisType := "desktop" }}
+{{- if eq .chezmoi.os "darwin" }}
+{{-   if contains "MacBook" (output "sysctl" "-n" "hw.model") }}
+{{-     $chassisType = "laptop" }}
+{{-   else }}
+{{-     $chassisType = "desktop" }}
+{{-   end }}
+{{- else if eq .chezmoi.os "linux" }}
+{{-   $chassisType = (output "hostnamectl" "--json=short" | mustFromJson).Chassis }}
+{{- else if eq .chezmoi.os "windows" }}
+{{-   $chassisType = (output "powershell.exe" "-NoProfile" "-NonInteractive" "-Command" "if ((Get-CimInstance -Class Win32_Battery | Measure-Object).Count -gt 0) { Write-Output 'laptop' } else { Write-Output 'desktop' }") | trim }}
+{{- end -}}
+
+{{- $osid := .chezmoi.os }}
+{{- if hasKey .chezmoi.osRelease "id" }}
+{{-   $osid = printf "%s-%s" .chezmoi.os .chezmoi.osRelease.id }}
+{{- end -}}
+
+{{- $computerName := .chezmoi.hostname -}}
+{{- if eq .chezmoi.os "darwin" }}
+{{    $computerName = output "scutil" "--get" "ComputerName" | trim }}
+{{- end -}}
+
+[data]
+    osid = {{ $osid | quote }}
+    chassisType = {{ $chassisType | quote }}
+    computerName = {{ $computerName | quote }}
+

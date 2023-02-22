@@ -5,7 +5,13 @@ export TERM="xterm-256color"
 # Disable autocomplete on scp, as it is always slow
 zstyle ':completion:*' remote-access no
 
-export EDITOR='vim'
+# Preferred editor for local and remote sessions
+if [[ -n $SSH_CONNECTION ]]; then
+     export EDITOR='vim'
+else
+    export EDITOR='code'
+fi
+
 export GITHUB_USERNAME="jpawlowski"
 export PATH="$HOME/.local/bin:$PATH"
 export PAGER="bat"
