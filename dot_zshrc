@@ -4,6 +4,7 @@ ZSH_THEME="agnoster"
 
 zstyle ':omz:update' mode disabled  # disable automatic updates and let chezmoi handle them
 COMPLETION_WAITING_DOTS="true"
+DISABLE_AUTO_UPDATE="true"
 
 FZF_BASE="$HOME/.fzf"
 
