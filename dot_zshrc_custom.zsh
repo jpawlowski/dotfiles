@@ -12,6 +12,8 @@ else
   export EDITOR='code'
 fi
 
+export GITHUB_USERNAME="jpawlowski"
+
 export PATH="$HOME/.local/bin:$PATH"
 export PAGER="bat"
 
