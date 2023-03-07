@@ -80,6 +80,8 @@ brew "sslscan"
 brew "tcpdump"
 # Analyze tcpdump output
 brew "tcptrace"
+# User interface to the TELNET protocol
+brew "telnet"
 # Programmatically correct mistyped console commands
 brew "thefuck"
 # Simplified and community-driven man pages
@@ -104,6 +106,8 @@ cask "1password-cli"
 cask "bartender"
 # Web browser focusing on privacy
 cask "brave-browser"
+# Draw.io is free online diagram software
+cask "drawio"
 # Web browser
 cask "firefox"
 # Developer targeted fonts with a high number of glyphs
@@ -139,6 +143,8 @@ cask "obs-virtualcam"
 cask "powershell"
 # Control your tools with a few keystrokes
 cask "raycast"
+# Control your Sonos system
+cask "sonos"
 # Music streaming service
 cask "spotify"
 # Messaging app with a focus on speed and security
