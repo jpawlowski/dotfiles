@@ -144,6 +144,8 @@ export THEFUCK_PRIORITY="git_hook_bypass=1100"
 
 alias dwl='cd $HOME/Downloads'
 
+eval "$(op completion zsh)"; compdef _op op
+
 if ! chezmoi verify; then
 	echo -e "\n  ⚠️  chezmoi: Configuration variance detected.\n              Run 'chezmoi status' or 'chezmmoi diff' to validate,\n              and 'chezmoi apply' to resolve.\n"
 fi
