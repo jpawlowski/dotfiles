@@ -2,6 +2,8 @@ export LANG="en_US.UTF-8"
 export LC_ALL="en_US.UTF-8"
 export TERM="xterm-256color"
 
+ENABLE_CORRECTION="true"
+
 # Disable autocomplete on scp, as it is always slow
 zstyle ':completion:*' remote-access no
 
@@ -133,6 +135,8 @@ alias lg=lazygit
 alias vsc="code ."
 alias vscn="code --new-window"
 alias vscr="code --reuse-window"
+
+alias brew-bundle-dump="brew bundle dump --global --describe --force"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
