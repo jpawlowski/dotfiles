@@ -1,0 +1,2 @@
+& ([ScriptBlock]::Create((oh-my-posh init pwsh --config "$(Join-Path -Path $env:POSH_THEMES_PATH -ChildPath 'powerlevel10k_modern.omp.json')" --print) -join "`n"))
+

@@ -1,0 +1,3 @@
+$(/opt/homebrew/bin/brew shellenv) | Invoke-Expression
+$env:POSH_THEMES_PATH=Join-Path -Path "$(brew --prefix oh-my-posh)" -ChildPath 'themes'
+

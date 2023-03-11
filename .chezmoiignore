@@ -4,5 +4,5 @@ README.md
 
 {{- if ne .osid "darwin" }}
 .Brewfile # Homebrew only exists on macOS
+.config/powershell/** # pwsh uses different profile path on Windows
 {{- end }}
-

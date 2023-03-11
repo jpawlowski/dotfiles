@@ -58,6 +58,8 @@ brew "mtr"
 brew "nmap"
 # Platform built on V8 to build network applications
 brew "node"
+# Prompt theme engine for any shell
+brew "oh-my-posh"
 # OpenBSD freely-licensed SSH connectivity tools
 brew "openssh"
 # PAM module for reattaching to the user's GUI (Aqua) session
