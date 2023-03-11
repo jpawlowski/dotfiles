@@ -78,6 +78,8 @@ brew "speedtest-cli"
 brew "ssllabs-scan"
 # Test SSL/TLS enabled services to discover supported cipher suites
 brew "sslscan"
+# Easiest, most secure way to use WireGuard and 2FA
+brew "tailscale"
 # Command-line packet analyzer
 brew "tcpdump"
 # Analyze tcpdump output
