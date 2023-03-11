@@ -50,6 +50,8 @@ brew "md5deep"
 brew "midnight-commander"
 # Menu-driven communications program
 brew "minicom"
+# UPnP IGD client library and daemon
+brew "miniupnpc"
 # Remote terminal application
 brew "mosh"
 # 'traceroute' and 'ping' in a single tool
@@ -188,5 +190,4 @@ mas "TestFlight", id: 899247664
 mas "TrashMe 3", id: 1490879410
 mas "UTM", id: 1538878817
 mas "WiFi Explorer", id: 494803304
-mas "WireGuard", id: 1451685025
 mas "Xcode", id: 497799835
