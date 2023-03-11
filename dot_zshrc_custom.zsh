@@ -16,7 +16,7 @@ export GITHUB_USERNAME="jpawlowski"
 export PATH="$HOME/.local/bin:$PATH"
 export PAGER="bat"
 
-source $HOME/.local/share/iterm2/iterm2_shell_integration.zsh
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh" || true
 
 alias zshc="$EDITOR $HOME/.zshrc_custom.zsh"
 alias zshs="$EDITOR $HOME/.secrets.sh"
@@ -145,8 +145,4 @@ export THEFUCK_PRIORITY="git_hook_bypass=1100"
 alias dwl='cd $HOME/Downloads'
 
 eval "$(op completion zsh)"; compdef _op op
-
-if ! chezmoi verify; then
-	echo -e "\n  ⚠️  chezmoi: Configuration variance detected.\n              Run 'chezmoi status' or 'chezmmoi diff' to validate,\n              and 'chezmoi apply' to resolve.\n"
-fi
 
