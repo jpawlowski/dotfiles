@@ -26,3 +26,9 @@ call plug#end()
 
 " run chezmoi apply whenever I save a dotfile
 autocmd BufWritePost ~/.local/share/chezmoi/* ! chezmoi apply --source-path "%"
+
+" 4 space characters for indentation
+set shiftwidth=4 smarttab
+set expandtab
+set tabstop=8 softtabstop=0
+
