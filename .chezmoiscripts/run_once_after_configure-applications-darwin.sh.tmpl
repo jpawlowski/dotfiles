@@ -1,0 +1,6 @@
+{{- if eq .chezmoi.os "darwin" -}}
+#!/usr/bin/env bash
+
+open -n -a "Microsoft Edge" --args --disable-features=msEdgeSidebarV2
+{{- end }}
+
