@@ -2,7 +2,7 @@ README.md
 .oh-my-zsh/cache/**
 .oh-my-zsh/custom/themes/powerlevel10k/**/*.zwc
 
-{{- if ne .osid "darwin" }}
+{{ if ne .chezmoi.os "darwin" }}
 .Brewfile # Homebrew only exists on macOS
 .config/powershell/** # pwsh uses different profile path on Windows
 {{- end }}
