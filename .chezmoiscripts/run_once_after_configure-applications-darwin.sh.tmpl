@@ -1,5 +1,5 @@
 {{ if (eq .chezmoi.os "darwin") -}}
-#!/usr/bin/env zsh
+#!/usr/bin/env bash
 
 set -eufo pipefail
 
@@ -16,9 +16,6 @@ osascript -e 'tell application "System Preferences" to quit'
 ###############################################################################
 
 sudo defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo HostName
-sudo defaults write /Library/Preferences/com.apple.loginwindow showInputMenu -bool true
-sudo defaults write /Library/Preferences/com.apple.loginwindow GuestEnabled -bool false
-sudo defaults write /Library/Preferences/com.apple.loginwindow LoginwindowText "Beware\! You are logging into Julian's laptop\!"
 
 ###############################################################################
 # General UI/UX                                                               #
