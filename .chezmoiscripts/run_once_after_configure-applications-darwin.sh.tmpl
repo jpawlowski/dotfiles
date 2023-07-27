@@ -1,6 +1,191 @@
-{{- if eq .chezmoi.os "darwin" -}}
-#!/usr/bin/env bash
+{{ if (eq .chezmoi.os "darwin") -}}
+#!/usr/bin/env zsh
 
-open -n -a "Microsoft Edge" --args --disable-features=msEdgeSidebarV2
-{{- end }}
+set -eufo pipefail
 
+###############################################################################
+# HOUSEKEEPING                                                                #
+###############################################################################
+
+# Close any open System Preferences panes, to prevent them from overriding
+# settings we're about to change
+osascript -e 'tell application "System Preferences" to quit'
+
+###############################################################################
+# Login Window                                                                #
+###############################################################################
+
+sudo defaults write /Library/Preferences/com.apple.loginwindow AdminHostInfo HostName
+sudo defaults write /Library/Preferences/com.apple.loginwindow showInputMenu -bool true
+sudo defaults write /Library/Preferences/com.apple.loginwindow GuestEnabled -bool false
+sudo defaults write /Library/Preferences/com.apple.loginwindow LoginwindowText "Beware\! You are logging into Julian's laptop\!"
+
+###############################################################################
+# General UI/UX                                                               #
+###############################################################################
+
+# Disable automatic capitalization as it's annoying when typing code
+defaults write NSGlobalDomain NSAutomaticCapitalizationEnabled -bool false
+
+# Disable smart dashes as they're annoying when typing code
+defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
+
+# Disable automatic period substitution as it's annoying when typing code
+defaults write NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled -bool false
+
+# Disable smart quotes as they're annoying when typing code
+defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
+
+# Disable auto-correct
+defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
+
+#################################################
+# Dock                                          #
+#################################################
+
+# Set the icon size of Dock items to 32 pixels
+defaults write com.apple.dock tilesize -int 32
+
+#################################################
+# Safari & WebKit                               #
+#################################################
+
+# Privacy: don't send search queries to Apple
+defaults write com.apple.Safari UniversalSearchEnabled -bool false
+defaults write com.apple.Safari SuppressSearchSuggestions -bool true
+
+# Show the full URL in the address bar (note: this still hides the scheme)
+defaults write com.apple.Safari ShowFullURLInSmartSearchField -bool true
+
+# Set Safari's home page to `about:blank` for faster loading
+defaults write com.apple.Safari HomePage -string "about:blank"
+
+# Prevent Safari from opening 'safe' files automatically after downloading
+defaults write com.apple.Safari AutoOpenSafeDownloads -bool false
+
+# Enable the Develop menu and the Web Inspector in Safari
+defaults write com.apple.Safari IncludeDevelopMenu -bool true
+defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true
+defaults write com.apple.Safari com.apple.Safari.ContentPageGroupIdentifier.WebKit2DeveloperExtrasEnabled -bool true
+
+# Disable auto-correct
+defaults write com.apple.Safari WebAutomaticSpellingCorrectionEnabled -bool false
+
+# Enable "Do Not Track"
+defaults write com.apple.Safari SendDoNotTrackHTTPHeader -bool true
+
+#################################################
+# Keyboard                                      #
+#################################################
+
+# Set a blazingly fast keyboard repeat rate
+defaults write NSGlobalDomain InitialKeyRepeat -int 15
+defaults write NSGlobalDomain KeyRepeat -int 2
+
+#################################################
+# Trackpad                                      #
+#################################################
+defaults write NSGlobalDomain com.apple.trackpad.forceClick -int 1
+defaults write NSGlobalDomain com.apple.trackpad.scaling -float 2
+defaults write com.apple.AppleMultitouchTrackpad Clicking -int 1
+
+#################################################
+# Terminal                                      #
+#################################################
+
+# Only use UTF-8 in Terminal.app
+defaults write com.apple.Terminal StringEncodings -array 4
+
+# Enable Secure Keyboard Entry in Terminal.app
+defaults write com.apple.Terminal SecureKeyboardEntry -bool true
+
+# Disable the annoying line marks
+defaults write com.apple.Terminal ShowLineMarks -int 0
+
+# Make sure Terminal is opened, might be we are running this script from somewhere else ...
+open -a "Terminal"
+
+profile_array=(Basic Pro)
+for profile in ${profile_array[*]}
+do
+  /usr/libexec/PlistBuddy -c "Delete 'Window Settings':$profile:'VisualBell'" ~/Library/Preferences/com.apple.Terminal.plist > /dev/null 2>&1
+  /usr/libexec/PlistBuddy -c "Add 'Window Settings':$profile:'VisualBell' bool false" ~/Library/Preferences/com.apple.Terminal.plist
+
+  /usr/libexec/PlistBuddy -c "Delete 'Window Settings':$profile:'StrictVTKeypad'" ~/Library/Preferences/com.apple.Terminal.plist > /dev/null 2>&1
+  /usr/libexec/PlistBuddy -c "Add 'Window Settings':$profile:'StrictVTKeypad' bool true" ~/Library/Preferences/com.apple.Terminal.plist
+
+  /usr/libexec/PlistBuddy -c "Delete :'Window Settings':$profile:'shellExitAction'" ~/Library/Preferences/com.apple.Terminal.plist > /dev/null 2>&1
+  /usr/libexec/PlistBuddy -c "Add :'Window Settings':$profile:'shellExitAction' integer 1" ~/Library/Preferences/com.apple.Terminal.plist
+
+  /usr/libexec/PlistBuddy -c "Delete :'Window Settings':$profile:'rowCount'" ~/Library/Preferences/com.apple.Terminal.plist > /dev/null 2>&1
+  /usr/libexec/PlistBuddy -c "Add :'Window Settings':$profile:'rowCount' integer 48" ~/Library/Preferences/com.apple.Terminal.plist
+  /usr/libexec/PlistBuddy -c "Delete :'Window Settings':$profile:'columnCount'" ~/Library/Preferences/com.apple.Terminal.plist > /dev/null 2>&1
+  /usr/libexec/PlistBuddy -c "Add :'Window Settings':$profile:'columnCount' integer 160" ~/Library/Preferences/com.apple.Terminal.plist
+
+  /usr/libexec/PlistBuddy -c "Delete :'Window Settings':$profile:'noWarnProcesses'" ~/Library/Preferences/com.apple.Terminal.plist > /dev/null 2>&1
+  /usr/libexec/PlistBuddy -c "Add :'Window Settings':$profile:'noWarnProcesses' array" ~/Library/Preferences/com.apple.Terminal.plist
+  /usr/libexec/PlistBuddy -c "Add :'Window Settings':$profile:'noWarnProcesses':0:ProcessName string screen" ~/Library/Preferences/com.apple.Terminal.plist
+  /usr/libexec/PlistBuddy -c "Add :'Window Settings':$profile:'noWarnProcesses':1:ProcessName string tmux" ~/Library/Preferences/com.apple.Terminal.plist
+  /usr/libexec/PlistBuddy -c "Add :'Window Settings':$profile:'noWarnProcesses':2:ProcessName string rlogin" ~/Library/Preferences/com.apple.Terminal.plist
+  /usr/libexec/PlistBuddy -c "Add :'Window Settings':$profile:'noWarnProcesses':3:ProcessName string ssh" ~/Library/Preferences/com.apple.Terminal.plist
+  /usr/libexec/PlistBuddy -c "Add :'Window Settings':$profile:'noWarnProcesses':4:ProcessName string slogin" ~/Library/Preferences/com.apple.Terminal.plist
+  /usr/libexec/PlistBuddy -c "Add :'Window Settings':$profile:'noWarnProcesses':5:ProcessName string telnet" ~/Library/Preferences/com.apple.Terminal.plist
+done
+
+defaults write com.apple.Terminal "Default Window Settings" -string Pro
+defaults write com.apple.Terminal "Startup Window Settings" -string Pro
+
+osascript -e "tell application \"Terminal\" to set the font name of window 1 to \"MesloLGS NF-Regular\""
+osascript -e "tell application \"Terminal\" to set the font size of window 1 to 16"
+
+#################################################
+# iTerm2                                        #
+#################################################
+
+# Appearance/Dimming: Dim background windows
+defaults write com.googlecode.iterm2 DimBackgroundWindows -bool true
+
+# Appearance/Dimming: Dimming amount
+defaults write com.googlecode.iterm2 SplitPaneDimmingAmount -float 0.15
+
+# Advanced: Scroll wheel sends arrow keys when in alternate screen mode. (ie. scrolling in bat)
+defaults write com.googlecode.iterm2 AlternateMouseScroll -int 1
+
+# Profiles/Window: Settings for New Windows
+/usr/libexec/PlistBuddy -c "set 'New Bookmarks':0:'Rows' 26" ~/Library/Preferences/com.googlecode.iterm2.plist
+
+# Profiles/Terminal: Scrollback Buffer (10000 lines)
+/usr/libexec/PlistBuddy -c "set 'New Bookmarks':0:'Scrollback Lines' 10000" ~/Library/Preferences/com.googlecode.iterm2.plist
+
+# Profiles/Text: Enable Blinking Cursor
+/usr/libexec/PlistBuddy -c "set 'New Bookmarks':0:'Blinking Cursor' 1" ~/Library/Preferences/com.googlecode.iterm2.plist
+
+
+###############################################################################
+# Kill affected applications                                                  #
+###############################################################################
+
+for app in "Activity Monitor" \
+	"Address Book" \
+	"Calendar" \
+	"cfprefsd" \
+	"Contacts" \
+	"Dock" \
+	"Finder" \
+	"Flycut" \
+	"Google Chrome Canary" \
+	"Google Chrome" \
+	"Mail" \
+	"Safari" \
+	"SizeUp" \
+	"Spectacle" \
+	"SystemUIServer" \
+	"iCal"; do
+	killall "${app}" &> /dev/null
+done
+
+echo "Need to manually quit and restart 'Terminal' and 'iTerm' - since one of these might be running this script."
+
+{{ end -}}
+
+echo "Done. Note that some of these changes require a logout/restart to take effect."
