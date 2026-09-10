@@ -7,25 +7,39 @@
     format = ssh
 
 [gpg "ssh"]
-    program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
+    allowedSignersFile = ~/.ssh/allowed_signers
 
 [commit]
+    gpgsign = true
+
+[tag]
     gpgsign = true
 
 [init]
     defaultBranch = main
 
 [merge]
-    conflictStyle = diff3
+    conflictStyle = zdiff3
 
 [pull]
-    rebase = false
+    ff = only
+
+[fetch]
+    prune = true
+
+[push]
+    autoSetupRemote = true
+
+[rerere]
+    enabled = true
+    autoupdate = true
 
 [submodule]
     recurse = true
 
 [core]
     excludesfile = ~/.gitignore_global
+    quotepath = false
     pager = diff-so-fancy | less --tabs=4 -RFX
 
 [interactive]
