@@ -3,6 +3,9 @@
 
 set -eufo pipefail
 
+# Say which command failed instead of leaving chezmoi to report "exit status 1".
+trap 'echo "failed at line $LINENO: $BASH_COMMAND" >&2' ERR
+
 ###############################################################################
 # HOUSEKEEPING                                                                #
 ###############################################################################
@@ -132,8 +135,10 @@ done
 defaults write com.apple.Terminal "Default Window Settings" -string Pro
 defaults write com.apple.Terminal "Startup Window Settings" -string Pro
 
-osascript -e "tell application \"Terminal\" to set the font name of window 1 to \"MesloLGS NF-Regular\""
-osascript -e "tell application \"Terminal\" to set the font size of window 1 to 16"
+# settings set, not window 1: the window only carries a copy of the profile,
+# so a font set on it is gone with the next new window.
+osascript -e "tell application \"Terminal\" to set the font name of settings set \"Pro\" to \"CascadiaMonoNF-Regular\""
+osascript -e "tell application \"Terminal\" to set the font size of settings set \"Pro\" to 16"
 
 #################################################
 # iTerm2                                        #
@@ -178,7 +183,7 @@ for app in "Activity Monitor" \
 	"Spectacle" \
 	"SystemUIServer" \
 	"iCal"; do
-	killall "${app}" &> /dev/null
+	killall "${app}" &> /dev/null || true
 done
 
 echo "Need to manually quit and restart 'Terminal' and 'iTerm' - since one of these might be running this script."
