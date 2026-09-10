@@ -1,5 +1,8 @@
 {{ if eq .chezmoi.os "darwin" }}
 $(/opt/homebrew/bin/brew shellenv) | Invoke-Expression
 $env:POSH_THEMES_PATH=Join-Path -Path "$(brew --prefix oh-my-posh)" -ChildPath 'themes'
+
+mise activate pwsh | Out-String | Invoke-Expression
 {{- end }}
 
+oh-my-posh init pwsh | Invoke-Expression
