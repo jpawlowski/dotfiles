@@ -1,34 +1,28 @@
-# Created by https://www.toptal.com/developers/gitignore/api/windows,macos,linux
-# Edit at https://www.toptal.com/developers/gitignore?templates=windows,macos,linux
+# The Workoho global gitignore.
+#
+#   git config --global core.excludesfile ~/.gitignore_global
+#
+# Only what this machine and its tools produce, never what a project produces.
+# A pattern here works for you and for nobody else, so anything a repository
+# needs ignored belongs in that repository's own .gitignore -- otherwise it
+# looks handled here and lands in the next person's working tree.
+#
+# The operating system and editor sections below are from gitignore.io
+# (toptal.com/developers/gitignore); the language and framework sections it
+# also offers are deliberately not here, for the reason above.
 
-### Linux ###
-*~
-
-# temporary files which can be created if a process still has a handle open of a deleted file
-.fuse_hidden*
-
-# KDE directory preferences
-.directory
-
-# Linux trash folder which might appear on any partition or disk
-.Trash-*
-
-# .nfs files are created when an open file is removed but is still being accessed
-.nfs*
-
-### macOS ###
+# --- macOS -----------------------------------------------------
 # General
 .DS_Store
 .AppleDouble
 .LSOverride
-
-# Icon must end with two \r
-Icon
-
-
+# The macOS custom-folder-icon file is deliberately absent. Its real name is
+# "Icon" plus a carriage return, which a plain `Icon` line does not match, and
+# every pattern that does -- `Icon?`, `Icon*` -- also matches Icons/ and Icon1
+# and would hide them on every machine. It only appears when somebody sets a
+# custom folder icon; ignore it in that repository if it ever shows up.
 # Thumbnails
 ._*
-
 # Files that might appear in the root of a volume
 .DocumentRevisions-V100
 .fseventsd
@@ -37,7 +31,6 @@ Icon
 .Trashes
 .VolumeIcon.icns
 .com.apple.timemachine.donotpresent
-
 # Directories potentially created on remote AFP share
 .AppleDB
 .AppleDesktop
@@ -45,35 +38,112 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
-### macOS Patch ###
+# --- macOS Patch -----------------------------------------------
 # iCloud generated files
 *.icloud
 
-### Windows ###
+# --- Windows ---------------------------------------------------
 # Windows thumbnail cache files
 Thumbs.db
 Thumbs.db:encryptable
 ehthumbs.db
 ehthumbs_vista.db
-
 # Dump file
 *.stackdump
-
 # Folder config file
 [Dd]esktop.ini
-
 # Recycle Bin used on file shares
 $RECYCLE.BIN/
-
-# Windows Installer files
-*.cab
-*.msi
-*.msix
-*.msm
-*.msp
-
-# Windows shortcuts
+# Windows shortcuts, which the shell creates
 *.lnk
 
-# End of https://www.toptal.com/developers/gitignore/api/windows,macos,linux
+# --- Linux -----------------------------------------------------
+*~
+# temporary files which can be created if a process still has a handle open of a deleted file
+.fuse_hidden*
+# KDE directory preferences
+.directory
+# Linux trash folder which might appear on any partition or disk
+.Trash-*
+# .nfs files are created when an open file is removed but is still being accessed
+.nfs*
 
+# --- Git -------------------------------------------------------
+# Created by git for backups. To disable backups in Git:
+# $ git config --global mergetool.keepBackup false
+*.orig
+# Created by git when using merge tools for conflicts
+*.BACKUP.*
+*.BASE.*
+*.LOCAL.*
+*.REMOTE.*
+*_BACKUP_*.txt
+*_BASE_*.txt
+*_LOCAL_*.txt
+*_REMOTE_*.txt
+
+# --- direnv ----------------------------------------------------
+# The evaluated cache. .envrc itself is not here: it belongs to a project
+# and is usually committed.
+.direnv
+
+
+# --- Secrets, as a second net -----------------------------------
+# The deliberate exception to "nothing a project produces". Everything else
+# here is scoped to the machine because a global pattern hides a repository's
+# omission from the person who made it -- but the damage is not symmetric. An
+# unignored venv/ is somebody committing clutter; an unignored .env.local is a
+# published secret, and that one cannot be taken back.
+#
+# .env stays tracked: under the cascade repo-setup describes it carries values
+# that are harmless after a fork. Only the .local files are secret, and
+# .env.local.example is a template that has to stay visible -- the patterns
+# below leave it alone, which was verified rather than assumed.
+.env.local
+.env.*.local
+
+# --- Agent and editor state, per machine ------------------------
+# Claude Code's per-person permissions and settings. The repository's own
+# .gitignore carries this too, on purpose: this line only protects this
+# machine, and a file that is untracked only here is a trap for everyone else.
+**/.claude/settings.local.json
+
+# No Codex equivalent exists, which is worth stating so nobody goes looking:
+# its project layer is .codex/config.toml and that is meant to be committed.
+# Tools nobody here uses are deliberately absent as well -- a pattern for an
+# editor or agent that is not on the workstation list is noise in a file whose
+# whole value is that every line earns its place.
+
+# Editor and IDE state that is a person's rather than a project's. .vscode/ is
+# deliberately absent -- a repository often commits it to share recommended
+# extensions and launch configurations, and ignoring it globally hides that.
+# .idea/ is absent for the same reason: code styles, inspection profiles and
+# shared run configurations live there and are meant to be committed. Only the
+# per-user members below are ignored.
+.idea/workspace.xml
+.idea/tasks.xml
+.idea/usage.statistics.xml
+.idea/shelf/
+.idea/httpRequests/
+*.iml
+*.swp
+*.swo
+.*.sw?
+
+# Four things the generator offered and this file refuses, because each hides
+# something a repository is supposed to carry:
+#
+#   .env    -- committed under the .env cascade repo-setup describes, holding
+#              the values nobody should have to look up. Ignoring it here means
+#              nobody can add it without git add -f, on every machine with this
+#              file.
+#   .envrc  -- direnv's own configuration, which belongs to the project.
+#   *.zip, *.dll -- offered under "PowerShell", and project artifacts: a test
+#              fixture or a vendored assembly would vanish from git status with
+#              no indication why.
+#   *.msi, *.msix, *.cab, *.msm, *.msp -- offered under "Windows", and build
+#              output rather than anything Windows leaves lying around. A
+#              repository that produces or tests an installer would lose it.
+#
+# The pattern in all four: a section named after a platform or a tool still
+# lists what that tool builds. Read the entries, not the heading.
