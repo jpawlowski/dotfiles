@@ -1,0 +1,13 @@
+# Added by OrbStack: 'orb' SSH host for Linux machines
+# This only works if it's at the top of ssh_config (before any Host blocks).
+# This won't be added again if you remove it.
+Include ~/.orbstack/ssh/config
+
+Host *
+  User root
+  ServerAliveInterval 120
+  ServerAliveCountMax 30
+  PreferredAuthentications publickey,keyboard-interactive
+  ForwardAgent yes
+  IdentityAgent "~/Library/Containers/com.bitwarden.desktop/Data/.bitwarden-ssh-agent.sock"
+  SendEnv LANG
