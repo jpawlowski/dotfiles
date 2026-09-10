@@ -104,31 +104,20 @@ eval "$(direnv hook zsh)"
 alias cp='cp -i'
 alias mv='mv -i'
 
-if [[ "$OSTYPE" == "darwin"* ]]; then
-    alias sed="gsed"
-    alias date="gdate"
-fi
-
-# Modern tools replace old ones
-alias cat="bat --paging never --plain"
+# Modern tools, under their own names rather than over the old ones
 alias catp="bat"
-alias find="fd"
-alias man="tldr"
-
-alias rg="rg --sort-files"
 
 # show file previews for fzf using bat
 alias fp="fzf --preview 'bat --style=numbers --color=always --line-range :500 {}'"
 
 # If we need to unalias entries from common-aliases from Oh-My-ZSH
 #for COMMAND in l ll la; do unalias \$COMMAND; done
-alias ls='exa' # ls
-alias l='exa -lbFa --git --icons' # list, size, type, git
-alias ll='exa -lbGFa --git --icons' # long list
-alias llm='exa -lbGda --git --icons --sort=modified' # long list, modified date sort
-alias la='exa -lbhHigUmuSa --time-style=long-iso --git --icons --color-scale' # all list
-alias lx='exa -lbhHigUmuSa@ --time-style=long-iso --git --icons --color-scale' # all + extended list
-alias lt="exa --tree --icons -a -I '.git|__pycache__|.mypy_cache|.ipynb_checkpoints'" # tree view
+alias l='eza -lbaF --git --icons=auto' # list, size, type, git
+alias ll='eza -lbGaF --git --icons=auto' # long list
+alias llm='eza -lbGda --git --icons=auto --sort=modified' # long list, modified date sort
+alias la='eza -lbhHigUmuSa --time-style=long-iso --git --icons=auto --color-scale=all' # all list
+alias lx='eza -lbhHigUmuSa@ --time-style=long-iso --git --icons=auto --color-scale=all' # all + extended list
+alias lt="eza --tree --icons=auto -a -I '.git|__pycache__|.mypy_cache|.ipynb_checkpoints'" # tree view
 
 alias lg=lazygit
 
@@ -141,10 +130,6 @@ alias brew-bundle-dump="brew bundle dump --global --describe --force"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-
-eval $(thefuck --alias)
-# To fix 'git push' with a new branch
-export THEFUCK_PRIORITY="git_hook_bypass=1100"
 
 alias dwl='cd $HOME/Downloads'
 

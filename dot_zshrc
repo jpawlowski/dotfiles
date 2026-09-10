@@ -17,11 +17,9 @@ DISABLE_AUTO_UPDATE="true"
 FZF_BASE="$HOME/.fzf"
 
 plugins=(
-  git
   zsh-autosuggestions
   zsh-history-substring-search
   zsh-syntax-highlighting
-  you-should-use
   fzf
 )
 

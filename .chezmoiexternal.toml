@@ -50,12 +50,6 @@
     exact = true
     stripComponents = 1
     refreshPeriod = "168h"
-[".oh-my-zsh/custom/plugins/you-should-use"]
-    type = "archive"
-    url = "https://github.com/MichaelAquilina/zsh-you-should-use/archive/master.tar.gz"
-    exact = true
-    stripComponents = 1
-    refreshPeriod = "168h"
 {{ $powerlevel10kVersion := "1.20.0" -}}
 [".oh-my-zsh/custom/themes/powerlevel10k"]
     type = "archive"
